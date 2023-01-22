@@ -49,7 +49,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       {authStatus === "configuring" && (
         <div className="h-screen w-screen flex justify-center items-center">
-          <ReactLoading type="bars" color="#6b728" height="5%" idth="5%" />
+          <ReactLoading type="bars" color="#6b728" height="5%" width="5%" />
         </div>
       )}
       {authStatus !== "authenticated" ? (
