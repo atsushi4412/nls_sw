@@ -34,7 +34,7 @@ const App = (props: AppProps) => {
   );
 };
 
-export async function getPower() {
+/*export async function getPower() {
   const response = await fetch(
     "https://clnjb72gh0.execute-api.ap-northeast-1.amazonaws.com/bata?power=1&emg=0&emg_rel=0"
   );
@@ -47,7 +47,7 @@ export async function getPower() {
     };
   });
 }
-
+*/
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [sidebarClosed, setSidebarClosed] = useState(true);
   const onSidebarToggle = (closed: boolean) => setSidebarClosed(closed);
@@ -60,7 +60,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   const onmousedown = () => {
     setBtnColor(true);
-    const data = getPower();
+    // const data = getPower();
   };
   const onmousup = () => {
     setBtnColor(false);
