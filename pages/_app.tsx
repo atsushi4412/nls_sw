@@ -34,12 +34,47 @@ const App = (props: AppProps) => {
   );
 };
 
+export async function getPower() {
+  const response = await fetch(
+    "https://clnjb72gh0.execute-api.ap-northeast-1.amazonaws.com/bata?power=1&emg=0&emg_rel=0"
+  );
+  const jsonData = await response.json();
+  return jsonData.items.map((elem: any) => {
+    return {
+      Power: elem.power,
+      Emg: elem.emg,
+      Emg_Release: elem.emg_rel,
+    };
+  });
+}
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [sidebarClosed, setSidebarClosed] = useState(true);
   const onSidebarToggle = (closed: boolean) => setSidebarClosed(closed);
   const { authStatus, signOut } = useAuthenticator((context) => [
     context.authStatus,
   ]);
+
+  const [power_btn_color, setBtnColor] = useState(false);
+  const [emg_btn_color, setEMGColor] = useState(false);
+
+  const onmousedown = () => {
+    setBtnColor(true);
+    const data = getPower();
+  };
+  const onmousup = () => {
+    setBtnColor(false);
+  };
+  const cls = power_btn_color
+    ? "bg-green-500 font-semibold text-white py-8 px-8 rounded m-5"
+    : "bg-stone-500 font-semibold text-white py-8 px-8 rounded m-5";
+
+  const onmouseclick = () => {
+    setEMGColor(!emg_btn_color);
+  };
+  const cls2 = emg_btn_color
+    ? "bg-red-500 font-semibold text-white py-8 px-8 rounded m-5"
+    : "bg-stone-500 font-semibold text-white py-8 px-8 rounded m-5";
 
   return (
     <>
@@ -58,27 +93,21 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         </div>
       ) : (
         <>
-          <Navbar
-            sidebarClosed={sidebarClosed}
-            onSidebarToggle={onSidebarToggle}
-            onSignOut={signOut}
-          />
-          <div className="flex overflow-hidden bg-white pt-16">
-            <Sidebar closed={sidebarClosed} onClick={onSidebarToggle} />
-            <div
-              id="main-content"
-              className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
-            >
-              <main>
-                <div className="pt-8 px-4">
-                  <Component {...pageProps} />
-                </div>
-              </main>
-              <Footer />
-              <CopyRight />
+          <main>
+            <div className="h-screen w-screen flex justify-center items-center">
+              <button
+                id="area1"
+                onMouseDown={onmousedown}
+                onMouseUp={onmousup}
+                className={cls}
+              >
+                POWER
+              </button>
+              <button onClick={onmouseclick} className={cls2}>
+                EMG
+              </button>
             </div>
-          </div>
-          <ToastContainer />
+          </main>
         </>
       )}
     </>

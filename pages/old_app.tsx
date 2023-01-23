@@ -57,16 +57,29 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <Authenticator hideSignUp={true} />
         </div>
       ) : (
-	<>
-          <main>
-            <div width="300" height="300" background-color="red">
-           	<p>test</p> 
+        <>
+          <Navbar
+            sidebarClosed={sidebarClosed}
+            onSidebarToggle={onSidebarToggle}
+            onSignOut={signOut}
+          />
+          <div className="flex overflow-hidden bg-white pt-16">
+            <Sidebar closed={sidebarClosed} onClick={onSidebarToggle} />
+            <div
+              id="main-content"
+              className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
+            >
+              <main>
+                <div className="pt-8 px-4">
+                  <Component {...pageProps} />
+                </div>
+              </main>
+              <Footer />
+              <CopyRight />
             </div>
-          </main>
-          <Footer />
-          <CopyRight />
+          </div>
           <ToastContainer />
-	</>
+        </>
       )}
     </>
   );
