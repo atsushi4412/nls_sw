@@ -26,7 +26,7 @@ Amplify.configure(awsconfig);
 
 const queryClient = new QueryClient();
 
-const url = "https://clnjb72gh0.execute-api.ap-northeast-1.amazonaws.com/bata";
+const url = "https://clnjb72gh0.execute-api.ap-northeast-1.amazonaws.com/bata?";
 
 const App = (props: AppProps) => {
   return (
