@@ -39,7 +39,7 @@ const App = (props: AppProps) => {
 };
 
 async function getData_power(p: string, e: string, e_r: string) {
-  const a = await fetch(url + p + e + e_r);
+  const a = await fetch(url + "power=" + p + "&emg=" + e + "&emg_rel=" + e_r);
 }
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
